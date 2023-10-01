@@ -31,18 +31,28 @@ int main(int argc, char const *argv[])
 
 void test_func()
 {
-	list_t l;
+	list_t la, lb;
 	int i;
 
-	creat_list(&l);
+	creat_list(&la);
+	creat_list(&lb);
 
 	FOREACH(datalen) {
-		insert_after(pdata[i], l);
+		insert_after(pdata[i], la);
 	}
 
-	show_list(l);
+	show_list(la);
+
+	printf("- split odd_even ...\n");
+	split_odd_even_index(la, lb);
+
+	printf("la:");
+	show_list(la);
+	printf("lb:");
+	show_list(lb);
 	
-	delet_list(l);
+	delet_list(la);
+	delet_list(lb);
 }
 
 void creat_list(list_t *l)
@@ -320,5 +330,12 @@ void inverse_element(list_t l)
 
 void split_odd_even_index(list_t la, list_t lb)
 {
-	// coding ...
+	struct node *a_node;
+	element_t elem;
+
+	a_node = la;
+	ITER_NODE(a_node) {
+		delet_after(a_node, la, &elem);
+		insert_after(elem, lb);
+	}
 }
