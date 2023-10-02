@@ -1,50 +1,57 @@
 #include "single_linklist.h"
 
-int *pdata = NULL;
-int datalen;
-
 int main(int argc, char const *argv[])
 {
-	int i;
-	if (argc != 2) {
-		fprintf(stderr, "Usage: %s <datalength>\n", argv[0]);
-		exit(EXIT_FAILURE);
-	}
-
-	datalen = atoi(argv[1]);
-	pdata = calloc(datalen, sizeof(int));
-
-	rand_data_1_100(pdata, datalen);
-
-	FOREACH(datalen) {
-		printf("%-4d", pdata[i]);
-	}
-
-	bubble_sort((void *)pdata, datalen, sizeof(int), compare_integer_desc);
-
-	printf("\n");
-
-	printf("---------------------- test function ----------------------\n");
-	test_func();
-
-	free(pdata);
+	test_func(argc, argv);
 	return 0;
 }
 
-void test_func()
+void test_func(int argc, char const *argv[])
 {
-	list_t la;
 	int i;
-
-	creat_list(&la);
-
-	FOREACH(datalen) {
-		insert_after(pdata[i], la);
+	int *a_pdata = NULL, *b_pdata = NULL;
+	int a_datalen, b_datalen;
+	if (argc != 3) {
+		fprintf(stderr, "Usage: %s <a_datalength> <b_datalength>\n", argv[0]);
+		exit(EXIT_FAILURE);
 	}
 
+	a_datalen = atoi(argv[1]);
+	a_pdata = calloc(a_datalen, sizeof(int));
+	rand_data_1_100(a_pdata, a_datalen);
+	bubble_sort((void *)a_pdata, a_datalen, sizeof(int), compare_integer_asc);
+
+	list_t la;
+	creat_list(&la);
+	FOREACH(a_datalen) {
+		insert_after(a_pdata[i], la);
+	}
+	free(a_pdata);
+	printf("la: ");
 	show_list(la);
-	
+
+	b_datalen = atoi(argv[2]);
+	b_pdata = calloc(b_datalen, sizeof(int));
+	rand_data_1_100(b_pdata, b_datalen);
+	bubble_sort((void *)b_pdata, b_datalen, sizeof(int), compare_integer_asc);
+
+	list_t lb;
+	creat_list(&lb);
+	FOREACH(b_datalen) {
+		insert_after(b_pdata[i], lb);
+	}
+	free(b_pdata);
+	printf("lb: ");
+	show_list(lb);
+
+	printf("- Merge two list...\n");
+	list_t lc = merge_list_keep_order(la, lb);
+	printf("lc: ");
+	show_list(lc);
+
 	delet_list(la);
+	delet_list(lb);
+	delet_list(lc);
 }
 
 void creat_list(list_t *l)
@@ -330,4 +337,34 @@ void split_odd_even_index(list_t la, list_t lb)
 		delet_after(a_node, la, &elem);
 		insert_after(elem, lb);
 	}
+}
+
+list_t merge_list_keep_order(list_t la, list_t lb)
+{
+	struct node *node_a = NEXT(la);
+	struct node *node_b = NEXT(lb);
+	list_t lc;
+
+	creat_list(&lc);
+
+	while(node_a && node_b) {
+
+		if (node_a->elem < node_b->elem) {
+			insert_after(node_a->elem, lc);
+			node_a = NEXT(node_a);
+			continue;
+		}
+
+		insert_after(node_b->elem, lc);
+		node_b = NEXT(node_b);
+	}
+
+	node_a = node_a != NULL ? node_a : node_b;
+	
+	while (node_a) {
+		insert_after(node_a->elem, lc);
+		node_a = NEXT(node_a);
+	}
+
+	return lc;
 }

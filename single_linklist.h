@@ -136,4 +136,12 @@ void inverse_element(list_t l);
  */
 void split_odd_even_index(list_t la, list_t lb);
 
+/**
+ * @brief merge two ordered list, MUST free after invoked
+ * 
+ * @param la 
+ * @param lb 
+ * @return list_t 
+ */
+list_t merge_list_keep_order(list_t la, list_t lb);
 #endif /* __SINGLE_LINKLIST_H */
