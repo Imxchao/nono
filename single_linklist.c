@@ -1,4 +1,9 @@
-#include "single_linklist.h"
+#include "list.h"
+
+struct node {
+	element_t elem;
+	struct node * next;
+};
 
 int main(int argc, char const *argv[])
 {

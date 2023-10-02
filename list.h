@@ -1,15 +1,10 @@
-#ifndef __SINGLE_LINKLIST_H
-#define __SINGLE_LINKLIST_H
+#ifndef __LIST_H
+#define __LIST_H
 
 #include "global.h"
 
 typedef struct node * list_t;
 typedef struct node * position_t;
-
-struct node {
-	element_t elem;
-	struct node * next;
-};
 
 void creat_list(list_t *l);
 void delet_list(list_t l);
@@ -144,4 +139,5 @@ void split_odd_even_index(list_t la, list_t lb);
  * @return list_t 
  */
 list_t merge_list_keep_order(list_t la, list_t lb);
-#endif /* __SINGLE_LINKLIST_H */
+
+#endif /* __LIST_H */
