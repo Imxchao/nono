@@ -38,3 +38,37 @@ void rand_data_1_100(int *pdata, int datalen)
 		pdata[i] = rand_range(1, 100);
 	}
 }
+
+void bubble_sort(void *base, int nmemb, int msize, 
+	int (*compare)(const void *p1, const void *p2))
+{
+	int sorted = 1;
+	int i;
+	char *ptmp = (char *)malloc(msize);
+	char *data = NULL;
+
+	do {
+		sorted = 1;
+		nmemb--;
+		data = (char *)base;
+		for (i = 0; i < nmemb; i++) {
+			if (compare(data, data + msize)) {
+				sorted = 0;
+				memcpy(ptmp, data, msize);
+				memcpy(data, data + msize, msize);
+				memcpy(data + msize, ptmp, msize);
+			}
+			data += msize;
+		}
+	} while(!sorted);
+}
+
+int compare_integer_desc(const void *p1, const void *p2)
+{
+	return *(int *)p1 - *(int *)p2 < 0;	
+}
+
+int compare_integer_asc(const void *p1, const void *p2)
+{
+	return *(int *)p1 - *(int *)p2 > 0;
+}

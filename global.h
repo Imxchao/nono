@@ -33,4 +33,11 @@ void test_null(void *arg);
 void test_func();
 
 void rand_data_1_100(int *pdata, int datalen);
+
+void bubble_sort(void *base, int nmemb, int msize, 
+	int (*compare)(const void *p1, const void *p2));
+
+int compare_integer_desc(const void *p1, const void *p2);
+int compare_integer_asc(const void *p1, const void *p2);
+
 #endif	/* _NONO_UTILS_H */

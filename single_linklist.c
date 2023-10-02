@@ -20,6 +20,8 @@ int main(int argc, char const *argv[])
 		printf("%-4d", pdata[i]);
 	}
 
+	bubble_sort((void *)pdata, datalen, sizeof(int), compare_integer_desc);
+
 	printf("\n");
 
 	printf("---------------------- test function ----------------------\n");
@@ -31,28 +33,18 @@ int main(int argc, char const *argv[])
 
 void test_func()
 {
-	list_t la, lb;
+	list_t la;
 	int i;
 
 	creat_list(&la);
-	creat_list(&lb);
 
 	FOREACH(datalen) {
 		insert_after(pdata[i], la);
 	}
 
 	show_list(la);
-
-	printf("- split odd_even ...\n");
-	split_odd_even_index(la, lb);
-
-	printf("la:");
-	show_list(la);
-	printf("lb:");
-	show_list(lb);
 	
 	delet_list(la);
-	delet_list(lb);
 }
 
 void creat_list(list_t *l)
