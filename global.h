@@ -26,6 +26,7 @@ typedef int element_t;
 	for ((p) = (p)->next; (p); (p) = (p)->next)
 
 #define NEXT(p) (p)->next
+#define PREV(p) (p)->prev
 
 uint64_t nono_rdtsc(void);
 int rand_range(int min, int max);

@@ -140,4 +140,12 @@ void split_odd_even_index(list_t la, list_t lb);
  */
 list_t merge_list_keep_order(list_t la, list_t lb);
 
+/**
+ * @brief delet_node for double-link list
+ * 
+ * @param p position
+ * @param l list
+ * @param elem element
+ */
+void delet_node(position_t p, list_t l, element_t *elem);
 #endif /* __LIST_H */
