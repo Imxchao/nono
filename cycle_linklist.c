@@ -24,11 +24,11 @@ int main(int argc, char const *argv[])
 	creat_list(&la);
 	FOREACH(datalen) {
 		printf("%-4d", pdata[i]);
-		insert_after(pdata[i], la);
+		insert_before(pdata[i], la);
 	}
 	printf("\n");
 
-	printf("- show insert_after\n");
+	printf("- show insert_before\n");
 
 	show_list(la);
 	delet_list(la);
@@ -61,6 +61,9 @@ void show_list(list_t l)
 {
 	struct node *node = NEXT(l);
 
+	if (node == l) {
+		printf("empty list\n");
+	}
 	while (node != l) {
 		printf("%-4d", node->elem);
 		node = NEXT(node);
@@ -82,4 +85,15 @@ void insert_after(element_t x, list_t l)
 	add->elem = x;
 	add->next = node->next;
 	node->next = add;
+}
+
+void insert_before(element_t x, list_t l)
+{
+	struct node *add;
+
+	add = (struct node*)NEW_NODE;
+	test_null(add);
+	add->elem = x;
+	NEXT(add) = NEXT(l);
+	NEXT(l) = add;
 }
