@@ -123,6 +123,20 @@ void insert_before(element_t x, list_t l)
 	new_node->prev = l;
 }
 
+position_t locate_node(element_t x, list_t l)
+{
+	position_t p;
+
+	p = l;
+	ITER_NODE(p) {
+		if (p->elem == x) {
+			break;
+		}
+	}
+
+	return p;
+}
+
 void delet_node(position_t p, list_t l, element_t *elem)
 {
 	if (p == NULL) {
@@ -139,20 +153,6 @@ void delet_node(position_t p, list_t l, element_t *elem)
 	*elem = p->elem;
 	printf("%s %s element = %d\n", __TIME__, __func__, p->elem);
 	free(p);
-}
-
-position_t locate_node(element_t x, list_t l)
-{
-	position_t p;
-
-	p = l;
-	ITER_NODE(p) {
-		if (p->elem == x) {
-			break;
-		}
-	}
-
-	return p;
 }
 
 void delet_after(position_t p, list_t l, element_t *elem)
