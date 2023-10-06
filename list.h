@@ -148,4 +148,12 @@ list_t merge_list_keep_order(list_t la, list_t lb);
  * @param elem element
  */
 void delet_node(position_t p, list_t l, element_t *elem);
+
+/**
+ * @brief insert element and keep proper order for cycle list
+ * 
+ * @param elem element_t
+ * @param la list_t
+ */
+void insert_keep_order_desc(element_t elem, list_t la);
 #endif /* __LIST_H */

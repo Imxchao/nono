@@ -11,6 +11,7 @@ int main(int argc, char const *argv[])
 	int *pdata = NULL;
 	int datalen;
 	int i;
+	element_t elem;
 
 	if (argc != 2) {
 		fprintf(stderr, "Usage: %s <datalength>\n", argv[0]);
@@ -21,16 +22,20 @@ int main(int argc, char const *argv[])
 	pdata = calloc(datalen, sizeof(int));
 	rand_data_1_100(pdata, datalen);
 
+	bubble_sort(pdata, datalen, sizeof(int), compare_integer_desc);
 	creat_list(&la);
 	FOREACH(datalen) {
-		printf("%-4d", pdata[i]);
-		insert_before(pdata[i], la);
+		insert_after(pdata[i], la);
 	}
-	printf("\n");
 
 	printf("- show insert_before\n");
-
 	show_list(la);
+
+	printf("Insert data: ");
+	scanf("%d", &elem);
+	insert_keep_order_desc(elem, la);
+	show_list(la);
+
 	delet_list(la);
 	return 0;
 }
@@ -96,4 +101,24 @@ void insert_before(element_t x, list_t l)
 	add->elem = x;
 	NEXT(add) = NEXT(l);
 	NEXT(l) = add;
+}
+
+void insert_keep_order_desc(element_t elem, list_t la)
+{
+	struct node *node;
+	struct node *next = la;
+	struct node *prev = la;
+
+	node = (struct node *)NEW_NODE;
+	node->elem = elem;
+
+	ITER_NODE(next) {
+		if (next->elem < node->elem) {
+			break;
+		}
+		prev = next;
+	}
+
+	node->next = prev->next;
+	prev->next = node;
 }
