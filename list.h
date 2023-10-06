@@ -3,6 +3,20 @@
 
 #include "global.h"
 
+struct node;
+typedef int element_t;
+
+#define NEW_NODE malloc(sizeof(struct node))
+#define EMPTY(p) (p)->next == NULL
+#define NOT_FOUND(p) (p) == NULL
+#define NOT_NULL(p) (p) != NULL
+
+#define ITER_NODE(p) \
+	for ((p) = (p)->next; (p); (p) = (p)->next)
+
+#define NEXT(p) (p)->next
+#define PREV(p) (p)->prev
+
 typedef struct node * list_t;
 typedef struct node * position_t;
 

@@ -6,15 +6,6 @@
 #include <stdint.h>
 #include <string.h>
 
-
-struct node;
-typedef int element_t;
-
-#define NEW_NODE malloc(sizeof(struct node))
-#define EMPTY(p) (p)->next == NULL
-#define NOT_FOUND(p) (p) == NULL
-#define NOT_NULL(p) (p) != NULL
-
 /**
  * @brief specific length
  * 
@@ -22,11 +13,6 @@ typedef int element_t;
 #define FOREACH(len) \
 	for (i = 0; i < (len); i++)
 
-#define ITER_NODE(p) \
-	for ((p) = (p)->next; (p); (p) = (p)->next)
-
-#define NEXT(p) (p)->next
-#define PREV(p) (p)->prev
 
 uint64_t nono_rdtsc(void);
 int rand_range(int min, int max);
