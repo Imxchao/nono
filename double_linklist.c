@@ -12,7 +12,6 @@ int main(int argc, char const *argv[])
 	int *pdata = NULL;
 	int datalen;
 	int i;
-	element_t elem;
 
 	if (argc != 2) {
 		fprintf(stderr, "Usage: %s <datalength>", argv[0]);
@@ -27,16 +26,12 @@ int main(int argc, char const *argv[])
 	FOREACH(datalen) {
 		insert_before(pdata[i], la);
 	}
-	show_list(la);
+	show_list(la);// before transfer
 
-	printf("delete element before: ");
-	scanf("%d", &elem);
-	position_t del = locate_node(elem, la);
-
-	delet_before(del, la, &elem);
-
-	show_list(la);
-	delet_list(la);
+	trans_dblist_2_cycle_dblist(la);
+	show_cycle_dblist_l2r(la);
+	show_cycle_dblist_r2l(la);
+	delet_cycle_dblist(la); // transfered
 	return 0;
 }
 
@@ -188,4 +183,55 @@ void delet_before(position_t p, list_t l, element_t *elem)
 	*elem = del->elem;
 	printf("%s %s before node(%d) element = %d\n", __TIME__, __func__, p->elem, del->elem);
 	free(del);
+}
+
+void trans_dblist_2_cycle_dblist(list_t la)
+{
+	struct node *node = la;
+
+	while(node->next != NULL) {
+		node->next->prev = node;
+		node = node->next;
+	}
+
+	node->next = la;
+	la->prev = node; // 首尾相连
+}
+
+void show_cycle_dblist_l2r(list_t la)
+{
+	printf("%s %s - ", __TIME__, __func__);
+	struct node *node = NEXT(la);
+
+	while(node != la) {
+		printf("%-4d", node->elem);
+		node = NEXT(node);
+	}
+	printf("\n");
+}
+
+void show_cycle_dblist_r2l(list_t la)
+{
+	printf("%s %s - ", __TIME__, __func__);
+	struct node *node = PREV(la);
+
+	while(node != la) {
+		printf("%-4d", node->elem);
+		node = PREV(node);
+	}
+	printf("\n");
+}
+
+void delet_cycle_dblist(list_t la)
+{
+	struct node *node = NEXT(la);
+	struct node *del;
+
+	while(node != la) {
+		del = node;
+		node = NEXT(del);
+		free(del);
+	}
+
+	free(la);
 }

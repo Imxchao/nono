@@ -156,4 +156,33 @@ void delet_node(position_t p, list_t l, element_t *elem);
  * @param la list_t
  */
 void insert_keep_order_desc(element_t elem, list_t la);
+
+/**
+ * @brief transfer double link list to cycle double link list
+ * 
+ * @param la list_t
+ */
+void trans_dblist_2_cycle_dblist(list_t la);
+
+/**
+ * @brief show cycle double link list from left to right
+ * 
+ * @param la list_t
+ */
+void show_cycle_dblist_l2r(list_t la);
+
+/**
+ * @brief show cycle double link list from right to left
+ * 
+ * @param la list_t
+ */
+void show_cycle_dblist_r2l(list_t la);
+
+/**
+ * @brief delete cycle double link list from left to right
+ * 
+ * @param la list_t
+ */
+void delet_cycle_dblist(list_t la);
+
 #endif /* __LIST_H */
