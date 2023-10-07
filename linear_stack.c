@@ -13,7 +13,7 @@ int main(int argc, char const *argv[])
 
 	init_stack(&sp);
 
-	while( (elem = getchar()) != '0' ) {
+	while( (elem = getchar()) != '\n' ) {
 		push_stack(elem, sp);
 	}
 
