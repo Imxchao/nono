@@ -17,7 +17,7 @@
 uint64_t nono_rdtsc(void);
 int rand_range(int min, int max);
 void test_null(void *arg);
-void test_func();
+void test_func(int argc, char const **argv);
 
 void rand_data_1_100(int *pdata, int datalen);
 
