@@ -200,3 +200,4 @@ void show_cycle_dblist_r2l(list_t la);
 void delet_cycle_dblist(list_t la);
 
 #endif /* __LIST_H */
+

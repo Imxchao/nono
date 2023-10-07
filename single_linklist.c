@@ -17,14 +17,16 @@ void test_func(int argc, char const *argv[])
 	int *a_pdata = NULL, *b_pdata = NULL;
 	int a_datalen, b_datalen;
 	if (argc != 3) {
-		fprintf(stderr, "Usage: %s <a_datalength> <b_datalength>\n", argv[0]);
+		fprintf(stderr, "Usage: %s <a_datalength> "
+			"<b_datalength>\n", argv[0]);
 		exit(EXIT_FAILURE);
 	}
 
 	a_datalen = atoi(argv[1]);
 	a_pdata = calloc(a_datalen, sizeof(int));
 	rand_data_1_100(a_pdata, a_datalen);
-	bubble_sort((void *)a_pdata, a_datalen, sizeof(int), compare_integer_asc);
+	bubble_sort((void *)a_pdata, a_datalen, sizeof(int),
+		    compare_integer_asc);
 
 	list_t la;
 	creat_list(&la);
@@ -38,7 +40,8 @@ void test_func(int argc, char const *argv[])
 	b_datalen = atoi(argv[2]);
 	b_pdata = calloc(b_datalen, sizeof(int));
 	rand_data_1_100(b_pdata, b_datalen);
-	bubble_sort((void *)b_pdata, b_datalen, sizeof(int), compare_integer_asc);
+	bubble_sort((void *)b_pdata, b_datalen, sizeof(int),
+		    compare_integer_asc);
 
 	list_t lb;
 	creat_list(&lb);
@@ -156,7 +159,8 @@ void insert_byindex(element_t x, list_t l, int i)
 	int j = 1;
 
 	if (i < 1) {
-		fprintf(stderr, "error index: index start from 1, index %d less than 1\n", i);
+		fprintf(stderr, "error index: index start from 1,"
+			"index %d less than 1\n", i);
 		return;
 	}
 
@@ -167,7 +171,8 @@ void insert_byindex(element_t x, list_t l, int i)
 	}
 
 	if (j < i) {
-		fprintf(stderr, "error index: index %d greater or equal than end index %d\n", i, j);
+		fprintf(stderr, "error index: index %d greater or "
+			"equal than end index %d\n", i, j);
 		return;
 	}
 
@@ -231,7 +236,8 @@ void delet_byindex(element_t *elem, list_t l, int i)
 	int j = 1;
 
 	if (i < 1) {
-		fprintf(stderr, "error index: index start from 1, index %d less than 1\n", i);
+		fprintf(stderr, "error index: index start from 1, "
+			"index %d less than 1\n", i);
 		return;
 	}
 
@@ -273,7 +279,8 @@ void eliminate_duplicate(list_t la)
 		ITER_NODE(node_j) {
 			if (node_i->elem == node_j->elem) {
 				delet_after(node_prev, la, &elem);
-				printf("- remove duplicate element = %d\n", elem);
+				printf("- remove duplicate element = %d\n"
+				       , elem);
 				node_j = node_prev;
 			}
 			node_prev = node_j;
@@ -373,3 +380,4 @@ list_t merge_list_keep_order(list_t la, list_t lb)
 
 	return lc;
 }
+

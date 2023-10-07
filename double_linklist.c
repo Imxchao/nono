@@ -26,12 +26,12 @@ int main(int argc, char const *argv[])
 	FOREACH(datalen) {
 		insert_before(pdata[i], la);
 	}
-	show_list(la);// before transfer
+	show_list(la);		/* before transfer */
 
 	trans_dblist_2_cycle_dblist(la);
 	show_cycle_dblist_l2r(la);
 	show_cycle_dblist_r2l(la);
-	delet_cycle_dblist(la); // transfered
+	delet_cycle_dblist(la);	/* transfered */
 	return 0;
 }
 
@@ -165,7 +165,8 @@ void delet_after(position_t p, list_t l, element_t *elem)
 	}
 
 	*elem = del->elem;
-	printf("%s %s after node(%d) element = %d\n", __TIME__, __func__, p->elem, del->elem);
+	printf("%s %s after node(%d) element = %d\n",
+	       __TIME__, __func__, p->elem, del->elem);
 	free(del);
 }
 
@@ -181,7 +182,8 @@ void delet_before(position_t p, list_t l, element_t *elem)
 	del = PREV(p);
 	NEXT(PREV(del)) = p;
 	*elem = del->elem;
-	printf("%s %s before node(%d) element = %d\n", __TIME__, __func__, p->elem, del->elem);
+	printf("%s %s before node(%d) element = %d\n",
+	       __TIME__, __func__, p->elem, del->elem);
 	free(del);
 }
 
@@ -195,7 +197,7 @@ void trans_dblist_2_cycle_dblist(list_t la)
 	}
 
 	node->next = la;
-	la->prev = node; // 首尾相连
+	la->prev = node;	/* end to end */
 }
 
 void show_cycle_dblist_l2r(list_t la)
@@ -235,3 +237,4 @@ void delet_cycle_dblist(list_t la)
 
 	free(la);
 }
+
