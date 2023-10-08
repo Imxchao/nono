@@ -1,4 +1,4 @@
-#include "stack.h"
+#include "linear_stack.h"
 
 struct nono_stack
 {
