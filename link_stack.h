@@ -1,11 +1,17 @@
 #ifndef __LINK_STACK_H
 #define __LINK_STACK_H
 
-#include "stack.h"
+#include "global.h"
 
-int empty_stack(nono_stack_t top);
-void delet_stack(nono_stact_t top);
+typedef char element_t;
 
+struct stack_t;
+typedef struct stack_t * stack_t;
+
+int empty_stack(stack_t top);
+
+stack_t push_stack(element_t elem, stack_t top);
+stack_t pop_stack(element_t *elem, stack_t top);
 
 #endif /* __LINK_STACK_H */
 
