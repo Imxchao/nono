@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include "link_stack.h"
 
 struct stack_t {
@@ -7,20 +8,7 @@ struct stack_t {
 
 int main(int argc, char const *argv[])
 {
-	element_t ch;
-	stack_t top;
-
-	while ( (ch = getchar()) != '\n' ) {
-		top = push_stack(ch, top);
-	}
-	
-	do
-	{
-		top = pop_stack(&ch, top);
-		printf("%-3c", ch);
-	} while (top != NULL);
-	
-	printf("\n");
+	round_bracket_match();
 				
 	return 0;
 }
@@ -61,8 +49,7 @@ stack_t pop_stack(element_t *elem, stack_t top)
 {
 	stack_t new_pop = NULL;
 	if (empty_stack(top)) {
-		fprintf(stderr, "error: empty stack!\n");
-		exit(EXIT_FAILURE);
+		return top;
 	}
 
 	*elem = top->elem;
@@ -71,4 +58,42 @@ stack_t pop_stack(element_t *elem, stack_t top)
 	top = new_pop;
 
 	return top;
+}
+
+int round_bracket_match()
+{
+	int i;
+	stack_t top;
+	element_t elem;
+	char *str = NULL; /* arithmetic expression */
+	size_t nsize;
+	ssize_t nmemb;
+
+	nmemb = getline(&str, &nsize, stdin);
+
+	FOREACH(nmemb) {
+		if (str[i] == '(') {
+			top = push_stack(str[i], top);
+			continue;
+		}
+
+		if (str[i] == ')') {
+			if (empty_stack(top)) {
+				fprintf(stderr, "[Error] round bracket not match!\n");
+				return 1;
+			}
+			top = pop_stack(&elem, top);
+		}
+	}
+
+	if (top != NULL) {
+		fprintf(stderr, "[Error] round bracket not match!\n");
+		while (NULL != (top = pop_stack(&elem, top))) {}; /* pop all */
+	} else {
+		printf("match!\n");
+	}
+
+	free(str);
+
+	return 0;
 }

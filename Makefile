@@ -4,7 +4,7 @@ CC = gcc
 RM = rm -f
 CFLAGS += -std=c11
 CFLAGS += -Wall -Wpedantic
-LDFLAGS += -lm
+LDFLAGS +=
 TARGETS = single_linklist.out double_linklist.out cycle_linklist.out \
 	linear_stack.out link_stack.out
 
