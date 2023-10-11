@@ -27,5 +27,7 @@ int round_bracket_match();
  */
 int palindromo_check();
 
+int palindromo_check_2();
+
 #endif /* __LINK_STACK_H */
 

@@ -8,7 +8,7 @@ struct stack_t {
 
 int main(int argc, char const *argv[])
 {
-	palindromo_check();
+	palindromo_check_2();
 				
 	return 0;
 }
@@ -79,7 +79,8 @@ int round_bracket_match()
 
 		if (str[i] == ')') {
 			if (empty_stack(top)) {
-				fprintf(stderr, "[Error] round bracket not match!\n");
+				fprintf(stderr, "[Error] round bracket not"
+					"match!\n");
 				return 1;
 			}
 			top = pop_stack(&elem, top);
@@ -88,7 +89,7 @@ int round_bracket_match()
 
 	if (top != NULL) {
 		fprintf(stderr, "[Error] round bracket not match!\n");
-		while (NULL != (top = pop_stack(&elem, top))) {}; /* pop all */
+		while (NULL != (top = pop_stack(&elem, top))) {};
 	} else {
 		printf("match!\n");
 	}
@@ -137,5 +138,41 @@ int palindromo_check()
 	}
 	free(word);
 
+	return 0;
+}
+
+
+int palindromo_check_2()
+{
+	element_t *str = NULL;
+	element_t elem;
+	stack_t top;
+	size_t size;
+	ssize_t length;
+	ssize_t prev_length;
+	ssize_t left_start;
+	int i;
+
+	length = getline(&str, &size, stdin);
+
+	printf("[%ld] %s", length, str);
+
+	length = length - 1;
+	prev_length = length / 2;
+	FOREACH(prev_length) {
+		top = push_stack(str[i], top);
+	}
+
+	left_start = (length + 1) / 2;
+	for (i = left_start; i < length; i++) {
+		top = pop_stack(&elem, top);
+		if (str[i] != elem) {
+			fprintf(stderr, "NOT parlindromo\n");
+			free(str);
+			return 1;
+		}
+	}
+	printf("PARLINDROMO\n");
+	free(str);
 	return 0;
 }
