@@ -8,7 +8,7 @@ struct stack_t {
 
 int main(int argc, char const *argv[])
 {
-	round_bracket_match();
+	palindromo_check();
 				
 	return 0;
 }
@@ -94,6 +94,48 @@ int round_bracket_match()
 	}
 
 	free(str);
+
+	return 0;
+}
+
+int palindromo_check()
+{
+	/* radar, madam, civic, level */
+	int i;
+	element_t *word = NULL;
+	size_t wordsize;
+	ssize_t wordlength;
+
+	stack_t top;
+	element_t elem;
+	int check_length = 0;
+
+	wordlength = getline(&word, &wordsize, stdin);
+	if (wordlength - 1 < 2) {
+		fprintf(stderr, "NOT palindromo!\n");
+		free(word);
+		return 1;
+	}
+
+	wordlength--;
+	FOREACH(wordlength) {
+		top = push_stack(word[i], top);
+	}
+
+	FOREACH(wordlength) {
+		top = pop_stack(&elem, top);
+		if (elem != word[i]) {
+			break;
+		}
+		check_length++;
+	}
+
+	if (check_length == wordlength) {
+		printf("PALINDROMO\n");
+	} else {
+		fprintf(stderr, "NOT palindromo!\n");
+	}
+	free(word);
 
 	return 0;
 }

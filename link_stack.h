@@ -20,5 +20,12 @@ stack_t pop_stack(element_t *elem, stack_t top);
  */
 int round_bracket_match();
 
+/**
+ * @brief characters run back again like "radar", "madam", "civic"
+ * 
+ * @return int 
+ */
+int palindromo_check();
+
 #endif /* __LINK_STACK_H */
 
