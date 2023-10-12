@@ -27,5 +27,7 @@ void bubble_sort(void *base, int nmemb, int msize,
 int compare_integer_desc(const void *p1, const void *p2);
 int compare_integer_asc(const void *p1, const void *p2);
 
+char hexmap(int hex);
+
 #endif	/* _NONO_UTILS_H */
 

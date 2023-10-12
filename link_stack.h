@@ -10,6 +10,7 @@ typedef struct stack_t * stack_t;
 
 int empty_stack(stack_t top);
 
+
 stack_t push_stack(element_t elem, stack_t top);
 stack_t pop_stack(element_t *elem, stack_t top);
 
@@ -28,6 +29,15 @@ int round_bracket_match();
 int palindromo_check();
 
 int palindromo_check_2();
+
+/**
+ * @brief parse unsigned int to the specific based number
+ * 
+ * @param decimal based on the number ten
+ * @param based the specific number based on
+ * @return
+ */
+void parse_uint(int decimal, int based);
 
 #endif /* __LINK_STACK_H */
 

@@ -8,8 +8,17 @@ struct stack_t {
 
 int main(int argc, char const *argv[])
 {
-	palindromo_check_2();
-				
+	int decimal, based;
+
+	if (argc != 3) {
+		fprintf(stderr, "Usage: %s <decmial> <based>\n", argv[0]);
+		exit(EXIT_FAILURE);
+	}
+
+	decimal = atoi(argv[1]);
+	based = atoi(argv[2]);
+
+	parse_uint(decimal, based);
 	return 0;
 }
 
@@ -176,3 +185,20 @@ int palindromo_check_2()
 	free(str);
 	return 0;
 }
+
+void parse_uint(int decimal, int based)
+{
+	stack_t top = NULL;
+	element_t elem;
+	
+	do {
+		top = push_stack(hexmap(decimal % based), top);
+	} while ((decimal /= based) != 0);
+
+	while(top) {
+		top = pop_stack(&elem, top);
+		printf("%c", elem);
+	}
+	printf("\n");
+}
+
