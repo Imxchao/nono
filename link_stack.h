@@ -39,5 +39,10 @@ int palindromo_check_2();
  */
 void parse_uint(int decimal, int based);
 
+uint64_t fac(uint64_t n);
+
+uint64_t fib(uint64_t n);
+
+float fu(int n);
 #endif /* __LINK_STACK_H */
 

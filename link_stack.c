@@ -8,17 +8,12 @@ struct stack_t {
 
 int main(int argc, char const *argv[])
 {
-	int decimal, based;
-
-	if (argc != 3) {
-		fprintf(stderr, "Usage: %s <decmial> <based>\n", argv[0]);
+	if (argc != 2) {
+		fprintf(stderr, "Usage: %s <number>\n", argv[0]);
 		exit(EXIT_FAILURE);
 	}
 
-	decimal = atoi(argv[1]);
-	based = atoi(argv[2]);
-
-	parse_uint(decimal, based);
+	printf("fu=%f\n", fu(atoi(argv[1])));
 	return 0;
 }
 
@@ -200,5 +195,34 @@ void parse_uint(int decimal, int based)
 		printf("%c", elem);
 	}
 	printf("\n");
+}
+
+uint64_t fac(uint64_t n)
+{
+	if (n == 0) {
+		return 1;
+	}
+
+	return n * fac(n - 1);
+}
+
+uint64_t fib(uint64_t n)
+{
+	if (n == 0)
+		return 0;
+
+	if (n == 1)
+		return 1;
+
+	return fib(n - 1) + fib(n - 2);
+}
+
+float fu(int n)
+{
+	if (n < 2) {
+		return n + 1;
+	}
+
+	return fu(n/2) * fu(n/4);
 }
 
