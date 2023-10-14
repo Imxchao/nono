@@ -6,7 +6,7 @@ CFLAGS += -std=c11
 CFLAGS += -Wall -Wpedantic
 LDFLAGS +=
 TARGETS = single_linklist.out double_linklist.out cycle_linklist.out \
-	linear_stack.out link_stack.out
+	linear_stack.out link_stack.out linear_queue.out
 
 all: $(TARGETS)
 
@@ -23,6 +23,9 @@ linear_stack.out: linear_stack.c global.o
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
 link_stack.out: link_stack.c global.o
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
+
+linear_queue.out: linear_queue.c global.o
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
 global.o: global.c
